@@ -8,8 +8,12 @@ const PORT = 3000;
 // Middleware para entender JSON (por si más adelante añades un POST)
 app.use(express.json());
 
-// --- AQUÍ DEFINIMOS EL ENDPOINT DIRECTAMENTE ---
-app.get("/getpayasos", async (req, res) => {
+// -----------------------------------------------
+// --- AQUÍ EMPIEZA LO QUE SERIA EL CONTROLLER ---
+// -----------------------------------------------
+
+// GET para obtener todos los payasos
+app.get("/payasos", async (req, res) => {
   try {
     // Usamos el servicio que ya tienes creado
     const payasos = await payasosService.getAllPayasos();
@@ -17,7 +21,27 @@ app.get("/getpayasos", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error interno", details: error.message });
   }
-});
+}); //FIN GET ALL
+
+// El POST para insertar un payaso
+app.post("/payasos", async (req, res) => {
+  try {
+    // Extraemos los datos que nos envían
+    const { name, email, arma } = req.body;
+
+    // Llamamos a la función del service que ya tienes creada
+    const newPayaso = await payasosService.registerPayaso(name, email, arma);
+
+    // Si todo va bien, devolvemos un 201 (Creado) y los datos del payaso
+    res.status(201).json(newPayaso);
+  } catch (error) {
+    // Si el service lanza un error (faltan datos o están repetidos), devolvemos 400
+    res.status(400).json({ error: error.message });
+  }
+}); //FIN POST
+
+// -----------------------------------------------
+// --- AQUÍ TERMINA LO QUE SERIA EL CONTROLLER ---
 // -----------------------------------------------
 
 // Función para inicializar la base de datos y levantar el servidor
@@ -25,7 +49,7 @@ async function startServer() {
   try {
     // 1. Inicializamos la base de datos
     await db.init();
-    console.log(" Base de datos de payasos inicializada correctamente.");
+    //console.log(" Base de datos de payasos inicializada correctamente.");
 
     // 2. Levantamos el servidor
     app.listen(PORT, () => {

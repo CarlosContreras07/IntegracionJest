@@ -10,3 +10,14 @@ Usar la extension extensión "SQLite Viewer" de Florian Klampfer
 Instalar express:
 
 1. npm install express
+
+Para lanzar el proyecto:  
+node .\src\controller\payasosController.js
+
+Ejemplo de consulta para el post:
+
+    {
+        "name": "Donald Trump",
+        "email": "payasos@casablanca.com",
+        "arma": "demagogo"
+    }

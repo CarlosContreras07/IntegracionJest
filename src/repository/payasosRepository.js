@@ -6,7 +6,7 @@ const { open } = require("sqlite");
 let dbConnection;
 
 const db = {
-  // 1. Inicializamos la BD en memoria y creamos la tabla
+  //Inicializamos la BD y creamos la tabla
   init: async () => {
     dbConnection = await open({
       // filename: ':memory:',  <-- Comentamos la memoria RAM
@@ -24,7 +24,7 @@ const db = {
     `);
   },
 
-  // 2. Buscar payaso por email
+  //Buscar payaso por email
   findPayasoByEmail: async (email) => {
     // get() devuelve la primera fila que coincida
     const payaso = await dbConnection.get(
@@ -34,7 +34,7 @@ const db = {
     return payaso || null;
   },
 
-  // 3. Buscar payaso por nombre
+  //Buscar payaso por nombre
   findPayasoByName: async (name) => {
     const payaso = await dbConnection.get(
       "SELECT * FROM payasos WHERE name = ?",
@@ -50,7 +50,7 @@ const db = {
     return payasos;
   },
 
-  // 4. Guardar payaso
+  //Guardar payaso
   savePayaso: async (payaso) => {
     // run() ejecuta la consulta (INSERT, UPDATE, DELETE)
     const result = await dbConnection.run(
@@ -66,12 +66,12 @@ const db = {
     };
   },
 
-  // 4. Limpiar la base de datos entre pruebas (Borramos los registros, no la tabla)
+  //Limpiar la base de datos entre pruebas (Borramos los registros, no la tabla)
   clear: async () => {
     await dbConnection.run("DELETE FROM payasos");
   },
 
-  // 5. Cerrar la conexión al terminar todo
+  //Cerrar la conexión al terminar todo
   close: async () => {
     if (dbConnection) {
       await dbConnection.close();

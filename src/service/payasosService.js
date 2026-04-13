@@ -22,8 +22,7 @@ async function registerPayaso(name, email, arma) {
   return newPayaso;
 } //fin funcion registerPayaso
 
-// ... tu función registerPayaso existente ...
-
+//FUNCION PARA OBTENER TODOS LOS PAYASOS DE LA BASE DE DATOS
 async function getAllPayasos() {
   // Pedimos todos los payasos a la base de datos
   const payasos = await db.findAllPayasos();
