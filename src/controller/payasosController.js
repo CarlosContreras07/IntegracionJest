@@ -1,8 +1,10 @@
 const express = require("express");
+const cors = require("cors"); // add para front
 const db = require("../repository/payasosRepository"); // Tu archivo del repositorio
 const payasosService = require("../service/payasosService"); // Tu archivo del servicio
 
 const app = express();
+app.use(cors()); //add para front
 const PORT = 3000;
 
 // Middleware para entender JSON (por si más adelante añades un POST)

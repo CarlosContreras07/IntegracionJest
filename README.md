@@ -21,3 +21,10 @@ Ejemplo de consulta para el post:
         "email": "payasos@casablanca.com",
         "arma": "demagogo"
     }
+
+Para el frontend vamos a instalar cors:
+
+1. npm install cors
+
+Soluciones problemas:  
+No ejecuta el js del controller - ejecutar con node y la ruta del archivo
